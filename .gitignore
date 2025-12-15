@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Node.js
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Project Specific (Generated)
+backend/ethiopia_climate_data.csv
+backend/drought_model.joblib
