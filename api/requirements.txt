@@ -1,0 +1,5 @@
+fastapi[standard]
+sqlmodel
+black
+pylint
+psycopg2-binary
