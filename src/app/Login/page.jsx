@@ -4,17 +4,17 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("/api/auth/login", {
+    const res = await fetch("/login/access-token", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: JSON.stringify({ username, password }),
     });
     const data = await res.json();
     if (data.token) {
@@ -36,10 +36,10 @@ export default function Login() {
         </h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <input
-          type="email"
-          placeholder="Email"
+          type="text"
+          placeholder="Username"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setUsername(e.target.value)}
           className="w-full p-3 mb-4 border rounded-lg dark:bg-gray-700 dark:text-white"
           required
         />

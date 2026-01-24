@@ -6,19 +6,21 @@ import Link from "next/link";
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setusername] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+  const role ="Author"
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("/api/auth/register", {
+    const res = await fetch("/users/reg", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password, username ,role}),
     });
     const data = await res.json();
-    if (data.token) {
-      localStorage.setItem("token", data.token);
+    if (data.access_token) {
+      localStorage.setItem("token", data.access_token);
       router.push("/dashboard");
     } else {
       setError(data.message || "Registration failed");
@@ -40,6 +42,14 @@ export default function Register() {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          className="w-full p-3 mb-4 border rounded-lg dark:bg-gray-700 dark:text-white"
+          required
+        />
+        <input
+          type="text"
+          placeholder="username"
+          value={username}
+          onChange={(e) => setusername(e.target.value)}
           className="w-full p-3 mb-4 border rounded-lg dark:bg-gray-700 dark:text-white"
           required
         />
